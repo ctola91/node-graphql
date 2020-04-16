@@ -1,0 +1,22 @@
+{
+  "name": "graphql-node",
+  "version": "1.0.0",
+  "description": "project graphql server",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git"
+  },
+  "keywords": [
+    "cmtp"
+  ],
+  "author": "cmtp",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "graphql": "^15.0.0"
+  }
+}
