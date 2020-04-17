@@ -19,7 +19,7 @@ const schema = buildSchema(`
 `)
 
 app.get('/', (req, res) => {
-    res.send('Welcome');
+    res.json({courses});
 })
 
 app.listen(3000, () => {
