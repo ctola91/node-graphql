@@ -16,6 +16,7 @@ const schema = buildSchema(`
 
     type Query {
         getCourses: [Course]
+        getCourse(id: ID): Course
     }
 
 `);
@@ -23,6 +24,10 @@ const schema = buildSchema(`
 const root = {
     getCourses() {
         return courses;
+    },
+    getCourse({ id }) {
+        return courses.find(course => id === course.id );
+        
     }
 }
 
