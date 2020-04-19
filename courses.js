@@ -7,5 +7,4 @@ module.exports = [
     { id: '6', title: 'Javascript Course', views: 5000},
     { id: '7', title: 'Javascript Course', views: 5000},
     { id: '8', title: 'Javascript Course', views: 5000},
-
 ];
