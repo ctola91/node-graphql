@@ -14,7 +14,16 @@ const typeDefs = `
     }
 `;
 
-const schema = makeExecutableSchema({typeDefs, resolvers: {}})
+const schema = makeExecutableSchema({typeDefs, resolvers: {
+    Query: {
+        getCourses(obj, {page, limit} ) {
+            if(page !== undefined) {
+                return courses.slice((page -1) * limit, page * limit);
+            }
+            return courses;
+        }
+    },
+}})
 
 const server = new ApolloServer({
   schema,
