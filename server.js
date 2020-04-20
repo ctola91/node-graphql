@@ -10,6 +10,10 @@ const typeDefs = `
         views: Int
     }
 
+    type Alert {
+        message: String
+    }
+
     input CourseInput {
         title: String!
         views: Int
@@ -17,9 +21,12 @@ const typeDefs = `
 
     type Query {
         getCourses(page: Int, limit: Int = 1): [Course]
+        getCourse(id: ID!): Course
     }
     type Mutation {
         addCourse(input: CourseInput): Course
+        updateCourse(id: ID!, input: CourseInput): Course
+        deleteCourse(id: ID!): Alert
     }
 `;
 
@@ -30,6 +37,9 @@ const resolvers = {
                 return courses.slice((page -1) * limit, page * limit);
             }
             return courses;
+        },
+        getCourse(obj, { id }) {
+            return courses.find(course => id === course.id);
         }
     },
     Mutation: {
@@ -38,6 +48,19 @@ const resolvers = {
             const course = { id, ...input }; // spread operator
             courses.push(course);
             return course;
+        },
+        updateCourse(obj, {id, input }) {
+            const courseIndex = courses.findIndex(course => id === course.id);
+            const course = courses[courseIndex];
+            const newCourse = Object.assign(course, input);
+            courses[courseIndex] = newCourse;
+            return newCourse;
+        },
+        deleteCourse(obj, { id }) {
+            courses = courses.filter(course => course.id != id);
+            return {
+                message: `This course with id ${id} was deleted`
+            };
         }
     }
 }
